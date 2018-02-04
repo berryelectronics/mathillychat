@@ -18,7 +18,7 @@
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <script>
     $(function () {
-      var socket = io();
+      var socket = io('https://mathilly-chat.herokuapp.com/', { 'cookies': Cookie.get('usersettings')});
 
       socket.emit('user setting', Cookies.get('usersettings'));
 
