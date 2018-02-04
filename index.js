@@ -1,20 +1,4 @@
 const express = require('express');
-const socketIO = require('socket.io');
-const path = require('path');
-
-const server = express()
-  .use((req, res) => res.sendFile(path.join(__dirname, '/index.html')))
-  .listen(process.env.PORT, () => console.log(`Listening on ${process.env.PORT}`));
-
-const io = socketIO(server);
-
-io.on('connection', (socket) => {
-  console.log('Client connected');
-  socket.on('disconnect', () => console.log('Client disconnected'));
-})
-
-/*
-const express = require('express');
 const path = require('path');
 
 const app = express();
@@ -191,7 +175,6 @@ io.on('connection', (socket) => {
   });
 });
 
-http.listen(80, () => {
-  console.log('listening on *:80');
+http.listen(process.env.PORT, () => {
+  console.log(`listening on *:${process.env.PORT}`);
 });
-*/
