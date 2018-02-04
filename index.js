@@ -11,10 +11,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/index.html'));
 });
 
-app.get('/cookie', (req, res) => {
-  res.cookie('testcookie', 'cookie_value').send('Cookie is set');
-});
-
 let chatlog = [];
 const users = [];
 
