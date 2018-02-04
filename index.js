@@ -4,6 +4,7 @@ const path = require('path');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+const sanitizehtml = require('sanitize-html');
 
 app.use('/rsrc', express.static(path.join(__dirname, '/rsrc/')));
 
@@ -47,6 +48,9 @@ io.on('connection', (socket) => {
   });
 
   socket.on('chat message', (msg) => {
+    // sanitize html first
+    msg = sanitizehtml(msg);
+
     //  Find Username by the socket.id
     let username;
     let userIndex;
@@ -135,6 +139,7 @@ io.on('connection', (socket) => {
       }
 
     } else { // Output Chat Message
+
       console.log(`user: ${username} | message: ${msg}`);
       const msgtext = `<i style="color:${users[userIndex][2]}">${username}:</i> <span style="color:${users[userIndex][3]}">${msg}</span>`;
       io.emit('chat message', msgtext);
