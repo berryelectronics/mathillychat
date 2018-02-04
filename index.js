@@ -15,9 +15,10 @@ app.get('/', (req, res) => {
 let chatlog = [];
 const users = [];
 
-io.on('connection', (socket, cookies) => {
-  console.log(cookies);
-  
+io.on('connection', (socket) => {
+  //  Force sending Cookie Data
+  socket.emit('get user settings');
+
   //  This is seen as the User connecting, by checking for the user settings
   socket.on('user setting', (msg) => {
     let username;
@@ -65,7 +66,7 @@ io.on('connection', (socket, cookies) => {
         break;
       }
     }
-
+    
     if (msg.substring(0, 5) === '!HELP') { //  Check for '!HELP' command
       console.log(`User requested help text: ${username}`);
       const msgtext = '<i><b>Type "!CLEAR" to clear the chat.<br>' +
