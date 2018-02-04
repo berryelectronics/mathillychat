@@ -49,7 +49,9 @@ io.on('connection', (socket) => {
 
   socket.on('chat message', (msg) => {
     // sanitize html first
-    msg = sanitizehtml(msg);
+    //msg = sanitizehtml(msg, {
+    //  allowedTags: []
+    //});
 
     //  Find Username by the socket.id
     let username;
