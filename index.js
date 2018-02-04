@@ -147,10 +147,11 @@ io.on('connection', (socket) => {
     } else if (msg.substring(0,6) === '!YOSHI') {
       const count = (msg.match(/!YOSHI/g) || []).length;
       console.log(`User ${username} posted ${count} Yoshi`);
-      let msgtext = `<i style="color:${users[userIndex][2]}">${username}:</i>`;
+      let msgtext = `<i style="color:${users[userIndex][2]}">${username}:</i><div style="display:inline">`;
       for (let i = 0; i < count; i += 1) {
         msgtext += `<marquee behavior="scroll" direction="left" scrollamount="30"><img src="/rsrc/yoshi.png" width="32" height="32" alt="Flying Bat"></marquee>`;
       }
+      msgtext += `</div>`;
       io.emit('chat message', msgtext);
       chatlog.push(msgtext);
     } else { // Output Chat Message
