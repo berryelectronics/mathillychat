@@ -141,9 +141,13 @@ io.on('connection', (socket) => {
       chatlog.push(msgtext);
     }
 
-    //  Create Array with Settings of the User to save as a Cookies
-    const userSettings = [users[userIndex][1], users[userIndex][2], users[userIndex][3]];
-    socket.emit('set cookie', JSON.stringify(userSettings));
+    //some weird case
+    if (typeof username !== 'undefined') {
+      //  Create Array with Settings of the User to save as a Cookies
+      const userSettings = [users[userIndex][1], users[userIndex][2], users[userIndex][3]];
+      socket.emit('set cookie', JSON.stringify(userSettings));
+    }
+    
   });
 
   socket.on('disconnect', () => {
