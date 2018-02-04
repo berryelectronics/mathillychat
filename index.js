@@ -3,7 +3,7 @@ const socketIO = require('socket.io');
 
 const server = express()
   .use((req, res) => res.sendFile(index.html))
-  .listen(80, () => console.log(`Listening on 80`));
+  .listen(process.env.PORT, () => console.log(`Listening on ${process.env.PORT}`));
 
 const io = socketIO(server);
 
