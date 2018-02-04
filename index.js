@@ -15,7 +15,9 @@ app.get('/', (req, res) => {
 let chatlog = [];
 const users = [];
 
-io.on('connection', (socket) => {
+io.on('connection', (socket, cookies) => {
+  console.log(cookies);
+  
   //  This is seen as the User connecting, by checking for the user settings
   socket.on('user setting', (msg) => {
     let username;
