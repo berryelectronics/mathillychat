@@ -146,7 +146,7 @@ io.on('connection', (socket) => {
 
     } else if (msg.substring(0,6) === '!YOSHI') {
       console.log(`User ${username} posted a Yoshi`);
-      const msgtext = `<marquee behavior="scroll" direction="left" scrollamount="30"><img src="/rsrc/yoshi.png" width="125" height="82" alt="Flying Bat"></marquee>`;
+      const msgtext = `<i style="color:${users[userIndex][2]}">${username}:</i><marquee behavior="scroll" direction="left" scrollamount="30"><img src="/rsrc/yoshi.png" width="125" height="82" alt="Flying Bat"></marquee>`;
       io.emit('chat message', msgtext);
       chatlog.push(msgtext);
     } else { // Output Chat Message
