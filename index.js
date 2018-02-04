@@ -66,7 +66,7 @@ io.on('connection', (socket) => {
         break;
       }
     }
-    
+
     if (msg.substring(0, 5) === '!HELP') { //  Check for '!HELP' command
       console.log(`User requested help text: ${username}`);
       const msgtext = '<i><b>Type "!CLEAR" to clear the chat.<br>' +
@@ -74,7 +74,8 @@ io.on('connection', (socket) => {
                     'Type "!NAMECOLOR=" + [colorcode] to change your Username color.<br>' +
                     'Type "!TEXTCOLOR=" + [colorcode] to change your Text color.<br>' +
                     'Type "!WHOISONLINE" to see which User is Online.<br>' +
-                    'Type "!PRIVATE" + ^[name]^ + [message] to send a private, temporary message to an online User. No Color Support</b></i>';
+                    'Type "!PRIVATE" + ^[name]^ + [message] to send a private, temporary message to an online User. No Color Support<br>' +
+                    'Type "!YOSHI" for a secret.</b></i>';
 
       socket.emit('chat message', msgtext);
     } else if (msg.substring(0, 6) === '!CLEAR') { //  Check for '!CLEAR' command
@@ -143,6 +144,11 @@ io.on('connection', (socket) => {
         io.to(targetUserSocketID).emit('chat message', `<i>(private) From '${username}' to You:</i> ${targetMessage}`);
       }
 
+    } else if (msg.substring(0,6) === '!YOSHI') {
+      console.log(`User ${username} posted a Yoshi`);
+      const msgtext = `<marquee behavior="scroll" direction="left" scrollamount="30"><img src="/rsrc/yoshi.png" width="125" height="82" alt="Flying Bat"></marquee>`;
+      io.emit('chat message', msgtext);
+      chatlog.push(msgtext);
     } else { // Output Chat Message
 
       console.log(`user: ${username} | message: ${msg}`);
