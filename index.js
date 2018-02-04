@@ -2,7 +2,7 @@ const express = require('express');
 const socketIO = require('socket.io');
 
 const server = express()
-  .use((req, res) => res.sendFile(index.html))
+  .use((req, res) => res.send('Hello!'))
   .listen(process.env.PORT, () => console.log(`Listening on ${process.env.PORT}`));
 
 const io = socketIO(server);
